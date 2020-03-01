@@ -82,7 +82,7 @@ void  RSAfile_crypt(char *inFilename, char *outFilename,rsaKey_t pubKey){
   /**attends u_*/
 
     uchar * encodeMsg = malloc( (tailleOctetFichier + 1) * sizeof(uchar));
-    encodeMsg = base64_encode(cryptedMsg, sizeof(uint64), &output_length);
+    encodeMsg = base64_encode(cryptedMsg, tailleOctetFichier, &output_length);
     printf("output : %d\n",sizeof(uint64)* tailleOctetFichier );
     encodeMsg[tailleOctetFichier] = cryptedMsg[tailleOctetFichier];
 
@@ -136,7 +136,8 @@ void RSAfile_decrypt(char* inFilename, char *outFilename, rsaKey_t privKey){
     uint64 * msgDecode = malloc( tailleOctetFichier * sizeof(uint64));
     size_t output_length = 0;
     /*  unsigned char *msgd = malloc(100*sizeof(unsigned char));*/
-    msgDecode  = base64_decode(cryptedMsg ,  tailleOctetFichier *(4 * ((sizeof(uchar)+ 2) / 3) ), &output_length);
+    msgDecode  = base64_decode(cryptedMsg ,4 * (((tailleOctetFichier ) + 2) / 3) , &output_length);
+;
 /*4 * ((input_length + 2) / 3)*/
     msgDecode[tailleOctetFichier - 1] = cryptedMsg[tailleOctetFichier - 1];
     for(int i = 0 ; i <tailleOctetFichier; ++i){
