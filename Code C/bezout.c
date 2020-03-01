@@ -33,8 +33,8 @@ long bezout(uint a,uint b,long *u,long *v){
 // 	long up = 0;
 // 	long vp = 1;
 // 	long rs,vs,us,q;
- 	
-    long quotient; 
+
+    long quotient;
     long reste=a;
     long u_inter;
     long v_inter;
@@ -42,7 +42,7 @@ long bezout(uint a,uint b,long *u,long *v){
     long ancient_v=0;
     *u=0;
     *v=1;
-    
+
     while(a%b!=0) {
         quotient=a/b;
         u_inter=*u;
@@ -51,10 +51,10 @@ long bezout(uint a,uint b,long *u,long *v){
         *v=ancient_v - quotient*(*v);
         ancient_u=u_inter;
         ancient_v=v_inter;
-        
+
         reste=a%b;
         a=b;
-        b=reste;        
+        b=reste;
     }
 
 	return reste;
@@ -68,18 +68,4 @@ long bezoutRSA(uint a,uint b,long *u,long *v){
     *u = *u+b;
   }
   return *u;
-}
-
-
-
-int main(void) {
-    uint dividende = 120;
-    uint diviseur = 23;
-    long u, v;
-    long pgcd = bezout(dividende, diviseur,&u,&v);
-    
-    printf("%ld\n%ld\n%ld\n",u,v,pgcd);
-  
-    
-    return 0;
 }

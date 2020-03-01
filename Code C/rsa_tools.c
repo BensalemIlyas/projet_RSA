@@ -4,7 +4,7 @@
 /// \brief calculs sur les nombres premiers, génération de clefs RSA
 
 #include "rsa_header.h"
-
+#include <stdio.h>
 void erreur(char* msg){
   printf("*** %s ***\n",msg);
   exit(-1);
@@ -192,7 +192,7 @@ uint pgcdFast(uint a,uint b){
 
 return pow2*a;
 } // pgcdFast()
-
+  extern FILE * logfp = NULL;
 void genKeysRabin(rsaKey_t *pubKey,rsaKey_t *privKey){
   /// \brief génère une paire de clefs
   /// \param[out] pubKey : clef publique
@@ -201,7 +201,6 @@ void genKeysRabin(rsaKey_t *pubKey,rsaKey_t *privKey){
   int cpt1,cpt2;
   uint64 num1 = genereUintRabin(2000,&cpt1);
   uint64 num2 = genereUintRabin(2000,&cpt2);
-
   fprintf(logfp,"num1=%lu, cpt1=%d\n",num1,cpt1);
   fprintf(logfp,"num2=%lu, cpt2=%d\n",num2,cpt2);
   uint64 N = num1*num2;
@@ -216,6 +215,7 @@ void genKeysRabin(rsaKey_t *pubKey,rsaKey_t *privKey){
   long U,V;
   long res = bezoutRSA(C,M,&U,&V);
   assert(2<U && U<M);
+
   fprintf(logfp,"N=%lu, M=%lu, C=%u, U=%ld, V=%ld\n",N,M,C,U,V);
 
   pubKey->E = C;

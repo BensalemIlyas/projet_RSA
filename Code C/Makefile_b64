@@ -1,0 +1,24 @@
+#Specified part of the Makefile
+EXEC = tests_base64
+#begin generic part of the makefie
+CC = gcc
+CFLAGS= -Wall -std=c99
+LDFLAGS= 
+ #contain all source files with .c extension, enable by command wildcard
+OBJ= tests-base64.o other_base64.o int2char.o
+SRC= $(OBJ:.o=.c) 
+
+all: $(EXEC)
+
+%.o: %.c
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+$(EXEC): $(OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS) #edition de lien : fichier objet -> executable 
+
+.PHONY:  clean mrproper all
+
+clean:
+	rm -rf *.o
+mrproper: clean
+	rm -rf $(EXEC)
