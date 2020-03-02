@@ -192,7 +192,7 @@ uint pgcdFast(uint a,uint b){
 
 return pow2*a;
 } // pgcdFast()
-  extern FILE * logfp = NULL;
+
 void genKeysRabin(rsaKey_t *pubKey,rsaKey_t *privKey){
   /// \brief génère une paire de clefs
   /// \param[out] pubKey : clef publique
