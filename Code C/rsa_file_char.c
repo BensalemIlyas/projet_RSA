@@ -46,21 +46,16 @@ void RSAcryptFile(char *inFilename,
   uint64 cryptedMsg[tailleOctetFichier];
   /*ok*/
   RSAcrypt(buffer, cryptedMsg, pubKey);
-  for(int i = 0; i < tailleOctetFichier; ++i){
-    printf("fin : %d\n",cryptedMsg[i] );
-  }
   /*
   utilisation la fonction donné sur le résultat de la fonction d'aurélie:
   */
   int length = 0;
   uint64 encode_int;
-  printf("DANS RSACryptFile\n");
   for(int i  = 0; i <tailleOctetFichier; i++){
     encode_int  = cryptedMsg[i];
     char *encode_char = base64_encode(&encode_int, sizeof(uint64), output_length);
     fseek(inFile,length,SEEK_SET);
     fwrite(encode_char,  1, *output_length,  outFile);
-    printf("%s\n",encode_char );
     free(encode_char);
     length += *output_length;
   }
@@ -107,33 +102,28 @@ void RSAunCryptFile(char *inFilename,
   int location = 0;
   int output_length = 0;
   uint64 * int_decode;
-    printf("DANS RSAunCryptFile\n");
+  uint64 test [15] = {2437 ,4527 ,1897 ,970, 3853 ,3675 ,970 ,3675 ,1657 ,970 ,2127 ,4650 ,1640 ,3522 ,755 };
   for(int j = 0; j <  nb_int64; j++){
     fseek(inFile,location,SEEK_SET);
     fread(char_encode,1, length ,inFile);
-    if(location < tailleOctetFichier){
-      printf("%s \n",char_encode);
-    }
-    int_decode = base64_decode(char_encode,length, &output_length);
-    cryptedMsg[j] = *int_decode;
+    /*int_decode = base64_decode(char_encode,length, &output_length);
+    *cryptedMsg[j] = *int_decode;*/
+    cryptedMsg[j] = test[j];
     location += length;
   }
-  printf("here\n");
-  free(int_decode);
-  free(char_encode);
+
+
 
   /*-Utiliser fonction d'aurélie void RSAdecrypt(unsigned char *msg, uint64 * crypterMsg, rsaKey_t pubKey);*/
-  uchar buffer[nb_int64];
+
+  unsigned char *buffer = malloc( 100*sizeof(unsigned char));
   /*
   ecrire la chaine de caractère dans le fichier en écriture
   */
 
   RSAdecrypt(buffer, cryptedMsg, privKey);
-  printf("%s\n",buffer );
-
-  fwrite(buffer,nb_int64 - 1, 1, outFile);
+  fwrite(buffer,nb_int64, 1, outFile);
   fclose(inFile);
   fclose(outFile);
-
 
 }

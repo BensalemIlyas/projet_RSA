@@ -27,6 +27,6 @@ void RSAdecrypt(unsigned char *msg, uint64 *cryptedMsg, rsaKey_t privKey){
 
   }
   *cryptedMsg = NULL;
-  free(cryptedMsg);
+
 
 }
