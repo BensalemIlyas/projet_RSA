@@ -43,10 +43,10 @@ void RSAcryptFile(char *inFilename,
 
   /*-Utiliser fonction d'aurélie void RSAcrypt(unsigned char *msg, uint64 * crypterMsg, rsaKey_t pubKey);*/
 
-  uint64 cryptedMsg[tailleOctetFichier + 1];
+  uint64 cryptedMsg[tailleOctetFichier];
   /*ok*/
   RSAcrypt(buffer, cryptedMsg, pubKey);
-  for(int i = 0; i < tailleOctetFichier + 1; ++i){
+  for(int i = 0; i < tailleOctetFichier; ++i){
     printf("fin : %d\n",cryptedMsg[i] );
   }
   /*
@@ -54,14 +54,15 @@ void RSAcryptFile(char *inFilename,
   */
   int length = 0;
   uint64 encode_int;
-  for(int i  = 0; i <tailleOctetFichier + 1; i++){
+  for(int i  = 0; i <tailleOctetFichier; i++){
     encode_int  = cryptedMsg[i];
     char *encode_char = base64_encode(&encode_int, sizeof(uint64), output_length);
     fseek(inFile,length,SEEK_SET);
     fwrite(encode_char, *output_length , 1, outFile);
+    free(encode_char);
     length += *output_length;
   }
-  printf("%d\n",length );
+
   /*
   ecrire la chaine de caractère dans le fichier en écriture
   */
@@ -103,22 +104,25 @@ void RSAunCryptFile(char *inFilename,
   char * char_encode = malloc( length * sizeof(char));
   int location = 0;
   int output_length = 0;
-
-  for(int i = 0; i <  length; i++){
+  uint64 * int_decode;
+  for(int j = 0; j <  nb_int64; j++){
+    printf("%d\n",j );
     fseek(inFile,location,SEEK_SET);
     fread(char_encode, length , 1 ,inFile);
 
-      uint64 * int_decode = base64_decode(char_encode,length, &output_length);
-    if(location < 192){
+    int_decode = base64_decode(char_encode,length, &output_length);
+    if(location < 200000){
       printf("%d\n",*int_decode );
     }
-    cryptedMsg[i] = *int_decode;
+    cryptedMsg[j] = *int_decode;
     location += length;
   }
-
+  printf("here\n");
+  free(int_decode);
+  free(char_encode);
 
   /*-Utiliser fonction d'aurélie void RSAdecrypt(unsigned char *msg, uint64 * crypterMsg, rsaKey_t pubKey);*/
-  uchar buffer[nb_int64 - 1];
+  uchar buffer[nb_int64];
   /*
   ecrire la chaine de caractère dans le fichier en écriture
   */
