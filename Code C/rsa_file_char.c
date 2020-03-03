@@ -54,11 +54,13 @@ void RSAcryptFile(char *inFilename,
   */
   int length = 0;
   uint64 encode_int;
+  printf("DANS RSACryptFile\n");
   for(int i  = 0; i <tailleOctetFichier; i++){
     encode_int  = cryptedMsg[i];
     char *encode_char = base64_encode(&encode_int, sizeof(uint64), output_length);
     fseek(inFile,length,SEEK_SET);
-    fwrite(encode_char, *output_length , 1, outFile);
+    fwrite(encode_char,  1, *output_length,  outFile);
+    printf("%s\n",encode_char );
     free(encode_char);
     length += *output_length;
   }
@@ -105,15 +107,14 @@ void RSAunCryptFile(char *inFilename,
   int location = 0;
   int output_length = 0;
   uint64 * int_decode;
+    printf("DANS RSAunCryptFile\n");
   for(int j = 0; j <  nb_int64; j++){
-    printf("%d\n",j );
     fseek(inFile,location,SEEK_SET);
-    fread(char_encode, length , 1 ,inFile);
-
-    int_decode = base64_decode(char_encode,length, &output_length);
-    if(location < 200000){
-      printf("%d\n",*int_decode );
+    fread(char_encode,1, length ,inFile);
+    if(location < tailleOctetFichier){
+      printf("%s \n",char_encode);
     }
+    int_decode = base64_decode(char_encode,length, &output_length);
     cryptedMsg[j] = *int_decode;
     location += length;
   }
