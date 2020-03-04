@@ -6,6 +6,12 @@
 
  Enlevez du makefile les fichiers qui ne sont pas encore développés
 
+ ##Pour tester la phase 2-1:
+ make -f Makefile-phase2-1
+
+ ##Pour tester la phase 2-2:
+ make -f Makefile-phase2-2
+
 ##Pour tester la conversion de binaire en base64
 make -f Makefile-base64
 
@@ -14,4 +20,6 @@ make -f Makefile-base64
 gcc test-blocs.c int2char.c -o test-blocs 
 
 ## Test du reste du code
-Les fichiers de tests et éventuellement les Makefiles correspondants arriveront un peu plus tard. 
+Les fichiers de tests et éventuellement les Makefiles correspondants arriveront un peu plus tard.
+
+ 
