@@ -1,7 +1,6 @@
 
 #include "rsa_header.h"
 
-
 /*gcc -g -Wall phase2-1.c RSAcrypt.c bezout.c rsa_tools.c rsa_print_tools.c -o phase2-1*/
 
 void RSAcrypt(unsigned char *msg, uint64 *cryptedMsg, rsaKey_t pubKey){

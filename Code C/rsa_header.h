@@ -11,7 +11,7 @@
 #include <assert.h>
 #include <time.h>
 #include "Sha-256/sha256_utils.h"
-//#include <gmp.h>
+#include <gmp.h>
 
 #define MAX_U_INT 4294967296
 #define MAX_U_INT64 18446744073709551616
@@ -93,8 +93,8 @@ uint64 * giveMeMem(int dim);
 tabUint64_t * RSAcryptUint64(tabUint64_t numMsg,rsaKey_t pubKey);
 tabUint64_t * RSAunCryptUint64(tabUint64_t numMsgC,rsaKey_t privKey);
 // GMP
-//void mersenneGmp(mpz_t resGmp,uint64 max,uint64 p); // ovni
+void mersenneGmp(mpz_t resGmp,uint64 max,uint64 p); // ovni
 void printKeyPair(keyPair_t keyPair);
 char * verifySignText(char *inFilename,tabUint64_t cryptAr, rsaKey_t verifyKey);
-//void puissance_mod_n_gmp(mpz_t res,uint64 a, uint64 e, uint64 n); // puis mod avec gmp
+void puissance_mod_n_gmp(mpz_t res,uint64 a, uint64 e, uint64 n); // puis mod avec gmp
 #endif
