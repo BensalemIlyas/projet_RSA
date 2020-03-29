@@ -1,0 +1,19 @@
+.PHONY: all clean
+CC = gcc
+CFLAGS = -Wall -g
+LDFLAGS = -lgmp
+OBJFILES = phase2-3.o other_base64.o int2char.o rsa_tools_gmp.o rsa_file_blocks.o bezout.o rsa_tools.o rsa_print_tools.o
+TARGET = phase2-3 
+
+
+all: $(TARGET)
+
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
+
+clean:
+	rm -f $(OBJFILES) *~
+mrproper:
+	rm -f $(TARGET)
+
+
