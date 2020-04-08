@@ -32,7 +32,7 @@ void RSAfile_crypt(char *inFilename,char *outFilename, rsaKey_t pubKey){
     }
     
     
-    while(fread(block_crypt,BLOCK_SIZE,1,fichierIn) ){
+    while(fread(block_crypt,1,BLOCK_SIZE,fichierIn) ){
         blockInt = convert_4byte2int(block_crypt); //uchar -> uint64
         block64_crypt = RSAcrypt1BlockGmp(blockInt,pubKey);
         encode_char = base64_encode(&block64_crypt, sizeof(uint64), &output_length); //uint64 -> base64
@@ -64,7 +64,7 @@ void RSAfile_decrypt(char *inFilename, char *outFilename, rsaKey_t privKey) {
     }
     
     //on lit le fichierIn par 1bloc de 12octets
-    while(fread(encode_char,BLOCK_BASE_64,1,fichierIn)) {
+    while(fread(encode_char,1,BLOCK_BASE_64,fichierIn)) {
         blockCryptedInt = base64_decode(encode_char,BLOCK_BASE_64,&output_length);
         blockDecrypted = RSAdecrypt1BlockGmp(*blockCryptedInt,privKey);
         convertInt2uchar(blockDecrypted,tabBlock);
