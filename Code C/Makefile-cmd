@@ -1,0 +1,14 @@
+.PHONY: all clean
+CC = gcc
+CFLAGS = -Wall -g
+LDFLAGS = -lgmp
+OBJFILES =  rsa_tools_gmp.o rsa_tools.o rsa_print_tools.c rsa_file_char.o bezout.o int2char.o other_base64.o main_interpreteV2.o rsa_cmdV2.o rsa_file_blocks.o gestion_erreurV2.o rsa_contactsV2.c
+TARGET = projet
+
+all: $(TARGET)
+
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
+
+clean:
+	rm -f $(OBJFILES) $(TARGET) *~
