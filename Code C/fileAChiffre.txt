@@ -1,0 +1,7 @@
+Nom de l'utilisateur : e
+Prénom de l'utilisateur : cd
+
+Numéro d'identificateur : [0]
+	Type : defaut
+	Clé publique = (3,1692277)
+	Clé privée = (1126451,1692277)

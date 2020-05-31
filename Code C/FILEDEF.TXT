@@ -1,0 +1,22 @@
+Nom de l'utilisateur : e
+Prénom de l'utilisateur : c
+
+Numéro d'identificateur : [8]
+	Type : crypt
+	Clé publique = (3,1692277)
+	Clé privée = (1126451,1692277)
+
+Numéro d'identificateur : [12]
+	Type : sign
+	Clé publique = (3,459001)
+	Clé privée = (305067,459001)
+
+Numéro d'identificateur : [3]
+	Type : crypt
+	Clé publique = (13,676547)
+	Clé privée = (311317,676547)
+
+Numéro d'identificateur : [4]
+	Type : crypt
+	Clé publique = (3,2152963)
+	Clé privée = (1433307,2152963)
